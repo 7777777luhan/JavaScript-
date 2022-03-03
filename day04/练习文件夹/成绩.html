@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        /* 对于成绩大于六十分的输出合格，低于六十分的输出不合格 
+        6x /10 = 6
+        7x /10 = 7
+        8x /10 = 8
+        9x /10 = 9
+        100 / 10 = 10
+        */
+        var score= +prompt("请输入你的分数");
+        //第一种方法
+       /*  switch(parseInt(score/10)){//取整
+            case 10:
+            case 9:
+            case 8:
+            case 7:
+            case 6:
+               console.log("合格");
+               break;
+               default:
+                console.log("不合格");
+                break;    
+        } */
+        //第二种方法
+        switch(true){
+            case score >=60:
+            console.log("合格");
+            break;
+            default:
+              console.log("不合格");
+              break;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

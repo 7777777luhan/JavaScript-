@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload=function(){
+            /* 
+            拖拽box1这个元素
+                -拖拽的流程
+                    1.当鼠标在被拖拽元素上按下时，开始拖拽 onmousedown
+                    2.当鼠标移动时，被拖拽元素跟随鼠标移动 onmousemove
+                    3.当鼠标松开时，被拖拽元素固定在当前位置 onmouseup
+            */
+        
+        //获取box1
+        var box1=document.getElementById("box1");
+        var box2=document.getElementById("box2");
+        var img3=document.getElementById("img3");
+     
+        //开启box1的拖拽
+        drag(box1);
+        //开启box2的拖拽
+        drag(box2);
+        //开启img3的拖拽
+        drag(img3);
+        }
+        /* 
+        提取专门用来设置拖拽的一段函数
+        参数：开启拖拽的元素
+
+        */
+       function drag(obj){
+            //当鼠标在被拖拽元素上按下时，开始拖拽 onmousedown
+        obj.onmousedown=function(event){
+
+            //设置box1捕获所有鼠标按下的事件
+            /* 
+            setCaptuer()
+                -这有IE支持，但是在火狐中调用时不报错，
+                    而如果用chrome调用，会报错
+            */
+           /* if(box1.setCapture){
+            box1.setCapture();
+           }; */
+           obj.setCapture && obj.setCapture();
+
+            event=event||window.event;
+            //求出div的偏移量 .clientX-元素.offsetLeft
+            //求出div的偏移量 .clientY-元素.offsetTop
+            var ol=event.clientX-obj.offsetLeft;
+            var ot=event.clientY-obj.offsetTop;
+            
+            //为documnet绑定一个onmousemove事件
+            document.onmousemove=function(event){
+                event=event||window.event;
+                //当鼠标移动时，被拖拽元素跟随鼠标移动 onmousemove
+                //获取滚动条滚动的距离
+                /* 
+                chrome认为浏览器的滚动条是body的,可以通过body，scrollTop来获取
+                火狐等浏览器认为浏览器的滚动条是html的
+                */
+                var st=document.body.scrollTop || document.documentElement.scrollTop;
+                var sl=document.body.scrollLeft || document.documentElement.scrollLeft;
+               //获取鼠标坐标
+               var left=event.clientX;
+               var top=event.clientY;
+               //修改box1的位置
+               obj.style.left=sl+left-ol+"px"
+               obj.style.top=st+top-ot+"px"
+            }
+
+            //为元素绑定一个鼠标松开事件
+            document.onmouseup=function(){
+            //当鼠标松开时，被拖拽元素固定在当前位置 onmouseup
+            //取消document的onmousemove事件
+            document.onmousemove=null;
+
+            //取消document.onmouseup事件
+            document.onmouseup=null;
+
+            //当鼠标松开时，取消对事件的捕获
+          obj.releaseCapture && obj.releaseCapture();
+            };
+           /* 
+           当我们去拖拽网页中的内容时，浏览器会默认去搜索引擎中搜索内容，
+            此时会导致拖拽功能的异常，这个是浏览器提供的默认行为
+            如果不希望发生这个行为，则可以通过return false来取消这个行为
+            
+            当时这招对IE8不起作用
+           */
+          return false;
+        };
+       }
+    </script>
+</head>
+<body>
+    <p>我是一段文字</p>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <img src="./img/3.jpg" alt="" width="300px" id="img3" style="position: absolute;">
+</body>
+</html>

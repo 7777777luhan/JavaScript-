@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+      /*  
+       测试如下的程序的性能
+        在程序执行前开启计时器
+        console.time("计时器的名字")可以用来开启一个计时器
+        它需要一个字符串作为参数，这个字符串会作为计时器的标识
+         */
+        console.time("test");
+       for(var i=2;i<=100;i++){
+           var flag=true;
+            for(var j=2;j<i;j++){
+                if(i%j==0){
+                    flag=false;
+                    //一旦进入了判断，则证明i不可能是质数了，此时循环再继续下去没有任何意义了
+                    //使用break来结束循环
+                    break;
+                }       
+            }
+            if(flag){
+                console.log(i);
+            }
+       }
+       //终止计时器
+       //console.timeend()用来停止一个计时器，需要一个计时器的名字作为参数
+       console.timeEnd("test");
+       
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

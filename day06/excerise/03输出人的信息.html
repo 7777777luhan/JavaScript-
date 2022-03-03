@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        /* 
+        输出一个函数，可以在控制台输出一个人的信息
+        可以输出人的name,age,gender,address
+
+        实参可以是任意的数据类型，也可以是一个对象
+        当我们的参数过多时，可以将参数封装到一个对象中，然后通过对象传递
+        这里o是形参，obj是实参
+        */
+        function mianji(r){
+        return 3.14*r*r;
+     }
+     var result=mianji(10);
+     console.log("result="+result);
+
+       function sayhello(o){
+          // console.log("o="+o);
+        console.log("我是"+o.name+",今年我"+o.age+"岁了,我是一个"+o.gender+"的，我住在"+o.address); 
+    }
+        //sayhello("孙悟空",18,"男","花果山");
+
+        //创建一个对象
+        var obj={
+            name:"孙悟空",
+            age:18,
+            gender:"男",
+            address:"花果山"
+        }
+        //sayhello(obj);
+        /* 
+        实参可以是一个对象，也可以是一个函数
+        */
+        function fun(a){
+    console.log("a="+a);
+           //a(obj);
+        }
+        //fun(sayhello(obj));
+        //fun(sayhello);
+
+        //将一个匿名函数作为实参传递给函数
+       /*  fun(function(){
+            alert("hello");
+        }); */
+
+        fun(mianji());
+        /* 
+        --mainji()
+            --调用函数
+            --相当于使用的函数的返回值
+
+        --mianji
+            --函数对象
+            -相当于直接使用函数对象
+        */
+       //第五十四节内容
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

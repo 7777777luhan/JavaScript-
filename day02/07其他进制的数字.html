@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        var a=123;
+        /*
+        在JS中如果需要表示16进制的数字，则需要以 0X开头
+            如果需要表示八进制的数字，则需要以0开头
+            如果需要表示二进制的数字，则需要以0b开头
+            但是不是所有的浏览器都支持
+        */
+
+        //16进制
+        a=0X123;
+        a=0Xcafe;
+
+        //八进制
+        a=070;
+
+        //二进制
+        a=0b10;
+        a=parseInt(a);
+
+        //像“070”这种字符串有些会但当成八进制解析，有些会当成十进制解析
+         a="070";
+         //可以在parseInt中传递第二个参数，来指定数字的进制
+         a=parseInt(a,10);//70
+         a=parseInt(a,8);//56
+        console.log(typeof a);
+        console.log(a);
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
